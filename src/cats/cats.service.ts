@@ -9,7 +9,7 @@ export class CatsService {
     this.cats.push(cat);
   }
 
-  fetchAll(): Cat[] {
+  findAll(): Cat[] {
     return this.cats;
   }
 }
