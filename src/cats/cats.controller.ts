@@ -1,16 +1,10 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { ValidationPipe } from '../validation.pipe';
 import { Roles } from 'src/roles.decorator';
+import { User } from 'src/user.decorator';
 
 @Controller('cats')
 export class CatsController {
@@ -27,8 +21,8 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.catsService.findOne(id);
+  @Get()
+  async findOne(@User('firstName') firstName: string) {
+    console.log(`Hello ${firstName}`);
   }
 }
